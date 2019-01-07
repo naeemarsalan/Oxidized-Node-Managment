@@ -1,0 +1,50 @@
+---
+olve_dns: true
+interval: 300
+use_syslog: false
+log: ~/.config/oxidized/log
+debug: false
+threads: 30
+timeout: 20
+retries: 3
+prompt: /^([\w.@-]+[#>]\s?)$/
+rest: 0.0.0.0:8080
+next_adds_job: false
+groups:
+  label1:
+    username: user
+    password: pass
+    vars:
+      enable: en
+pid: /home/oxidized/.config/oxidized/pid
+stats:
+  history_size: 10
+input:
+  default: ssh, telnet
+  debug: false
+  ssh:
+    secure: false
+  ftp:
+    passive: true
+  utf8_encoded: true
+output:
+  default: git
+  git:
+    user: oxidized
+    email: oxidized@oxidized.com
+    repo: /home/oxidized/git
+source:
+  default: csv
+  csv:
+    file: /home/oxidized/.config/oxidized/router.db
+    delimiter: !ruby/regexp /,/
+    map:
+      name: 0
+      model: 2
+      group: 3
+      ip: 1
+    gpg: false
+model_map:
+  cisco: ios
+  huawei: vrp
+...
